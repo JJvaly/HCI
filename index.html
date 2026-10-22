@@ -1,236 +1,204 @@
-<!DOCTYPE html>
+from pathlib import Path
+
+html = r'''<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>日常生活动态变化下的食物浪费问题研究 · HCI P3 Project Website</title>
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
-    line-height: 1.75;
-    color: #2c3e2d;
-    background: #f7f9f4;
-  }
-  nav {
-    position: sticky; top: 0; z-index: 100;
-    background: #2d5016;
-    padding: 14px 40px;
-    display: flex; justify-content: space-between; align-items: center;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  }
-  nav .brand { color: #fff; font-weight: 700; font-size: 17px; }
-  nav a { color: #d8e6c8; text-decoration: none; margin-left: 22px; font-size: 14px; transition: color .2s; }
-  nav a:hover { color: #fff; }
-  header.hero {
-    background: linear-gradient(135deg, #4a7c2f 0%, #6faa44 100%);
-    color: #fff;
-    padding: 80px 40px;
-    text-align: center;
-  }
-  header.hero h1 { font-size: 34px; margin-bottom: 16px; font-weight: 700; }
-  header.hero p { font-size: 17px; max-width: 760px; margin: 0 auto; opacity: 0.95; }
-  header.hero .meta { margin-top: 22px; font-size: 14px; opacity: 0.85; }
-  section { max-width: 960px; margin: 0 auto; padding: 56px 32px; }
-  h2 {
-    font-size: 26px; color: #2d5016;
-    border-left: 5px solid #6faa44;
-    padding-left: 14px; margin-bottom: 26px;
-  }
-  h3 { font-size: 18px; color: #3a6120; margin: 22px 0 10px; }
-  p { margin-bottom: 12px; color: #3a4a3a; }
-  .team-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 18px; margin-top: 20px;
-  }
-  .team-card {
-    background: #fff; border-radius: 10px; padding: 22px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-    text-align: center;
-    border-top: 3px solid #6faa44;
-  }
-  .team-card .avatar {
-    width: 56px; height: 56px; border-radius: 50%;
-    background: #e3efd4; color: #2d5016;
-    line-height: 56px; font-size: 20px; font-weight: 700;
-    margin: 0 auto 10px;
-  }
-  .team-card .name { font-weight: 600; color: #2d5016; }
-  .team-card .sid { font-size: 13px; color: #7a8a7a; margin-top: 4px; }
-  .team-card .role { font-size: 13px; color: #5a7a4a; margin-top: 8px; }
-  .callout {
-    background: #eef5e3; border-left: 4px solid #6faa44;
-    padding: 16px 20px; border-radius: 0 8px 8px 0; margin: 18px 0;
-  }
-  ul, ol { margin: 10px 0 16px 24px; }
-  li { margin-bottom: 6px; color: #3a4a3a; }
-  table {
-    width: 100%; border-collapse: collapse; margin: 16px 0;
-    background: #fff; border-radius: 8px; overflow: hidden;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
-  }
-  th, td { padding: 10px 14px; text-align: left; border-bottom: 1px solid #eef2e8; font-size: 14px; }
-  th { background: #4a7c2f; color: #fff; font-weight: 600; }
-  tr:hover td { background: #f9fbf5; }
-  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-  @media (max-width: 720px) { .two-col { grid-template-columns: 1fr; } }
-  footer {
-    background: #2d5016; color: #c8d8b8; text-align: center;
-    padding: 24px; font-size: 13px; margin-top: 40px;
-  }
-  .tag {
-    display: inline-block; background: #e3efd4; color: #2d5016;
-    padding: 2px 10px; border-radius: 12px; font-size: 12px; margin-right: 6px;
-  }
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.75;color:#2c3e2d;background:#f7f9f4}
+nav{position:sticky;top:0;z-index:100;background:#2d5016;padding:14px 28px;display:flex;justify-content:space-between;align-items:center;gap:16px;box-shadow:0 2px 8px #0001}
+nav .brand{color:#fff;font-weight:700;font-size:17px;white-space:nowrap}
+nav .links{display:flex;flex-wrap:wrap;gap:8px 18px}
+nav a{color:#d8e6c8;text-decoration:none;font-size:14px}
+nav a:hover{color:#fff}
+header.hero{background:linear-gradient(135deg,#4a7c2f,#6faa44);color:#fff;padding:72px 24px;text-align:center}
+.hero h1{font-size:clamp(25px,4vw,36px);margin-bottom:16px}
+.hero p{font-size:17px;max-width:820px;margin:0 auto;opacity:.96}
+.hero .meta{margin-top:18px;font-size:14px;opacity:.9}
+section{max-width:1100px;margin:0 auto;padding:52px 28px}
+h2{font-size:25px;color:#2d5016;border-left:5px solid #6faa44;padding-left:14px;margin-bottom:24px}
+h3{font-size:18px;color:#3a6120;margin:20px 0 10px}
+p{margin-bottom:12px;color:#3a4a3a}
+.team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:18px;margin-top:20px}
+.team-card,.panel,.stat-card{background:#fff;border-radius:10px;padding:20px;box-shadow:0 2px 8px #0000000a}
+.team-card{text-align:center;border-top:3px solid #6faa44}
+.avatar{width:56px;height:56px;border-radius:50%;background:#e3efd4;color:#2d5016;line-height:56px;font-size:20px;font-weight:700;margin:0 auto 10px}
+.name{font-weight:600;color:#2d5016}.sid{font-size:13px;color:#7a8a7a;margin-top:4px}.role{font-size:13px;color:#5a7a4a;margin-top:8px}
+.callout{background:#eef5e3;border-left:4px solid #6faa44;padding:16px 20px;border-radius:0 8px 8px 0;margin:18px 0}
+ul,ol{margin:10px 0 16px 24px}li{margin-bottom:6px;color:#3a4a3a}
+table{width:100%;border-collapse:collapse;margin:16px 0;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 1px 4px #0000000d}
+th,td{padding:10px 12px;text-align:left;border-bottom:1px solid #eef2e8;font-size:13px;vertical-align:top}
+th{background:#4a7c2f;color:#fff;font-weight:600}tr:hover td{background:#f9fbf5}
+.table-wrap{overflow-x:auto;border-radius:8px}
+.two-col{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+.tag{display:inline-block;background:#e3efd4;color:#2d5016;padding:2px 10px;border-radius:12px;font-size:12px;margin-right:6px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin:20px 0}
+.stat-card{border-bottom:3px solid #6faa44}
+.stat-number{font-size:30px;font-weight:750;color:#2d5016;line-height:1.3}
+.stat-label{font-size:14px;color:#60715b}
+.chart-panel{background:#fff;border-radius:10px;padding:20px;box-shadow:0 2px 8px #0000000a;margin:16px 0}
+.bar-row{display:grid;grid-template-columns:minmax(110px,1.2fr) minmax(100px,3fr) 40px;gap:12px;align-items:center;margin:12px 0;font-size:14px}
+.bar-track{height:13px;background:#edf2e7;border-radius:20px;overflow:hidden}
+.bar-fill{height:100%;background:linear-gradient(90deg,#6faa44,#4a7c2f);border-radius:20px}
+.bar-value{font-weight:700;color:#2d5016;text-align:right}
+.note{font-size:13px;color:#6c7968;background:#f0f4eb;padding:12px 14px;border-radius:7px;margin:14px 0}
+.interview-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+.interview-card{background:#fff;border-radius:10px;padding:20px;border-top:3px solid #6faa44;box-shadow:0 2px 8px #0000000a}
+.interview-card h3{margin-top:0}
+.quote{font-style:italic;color:#45613a;border-left:3px solid #b8d49a;padding-left:12px;margin:12px 0}
+details{background:#fff;border-radius:8px;padding:14px 18px;margin:14px 0;box-shadow:0 1px 5px #0000000a}
+summary{cursor:pointer;color:#2d5016;font-weight:650}
+footer{background:#2d5016;color:#c8d8b8;text-align:center;padding:24px;font-size:13px;margin-top:30px}
+@media(max-width:720px){nav{align-items:flex-start;flex-direction:column;padding:14px 18px}.two-col{grid-template-columns:1fr}section{padding:38px 18px}.bar-row{grid-template-columns:100px minmax(70px,1fr) 32px;gap:8px}th,td{padding:8px;font-size:12px}}
 </style>
 </head>
 <body>
-
 <nav>
   <div class="brand">🍃 Food Waste HCI Project</div>
-  <div>
-    <a href="#team">小组介绍</a>
-    <a href="#proposal">项目方案</a>
-    <a href="#goals">研究目标</a>
-    <a href="#questions">研究问题</a>
-    <a href="#dataplan">数据收集计划</a>
+  <div class="links">
+    <a href="#team">小组介绍</a><a href="#proposal">项目方案</a><a href="#goals">研究目标</a>
+    <a href="#questions">研究问题</a><a href="#dataplan">数据收集计划</a><a href="#findings">调研数据与发现</a>
   </div>
 </nav>
-
 <header class="hero">
-  <h1>日常生活态变化下的食物浪费问题研究</h1>
+  <h1>日常生活动态变化下的食物浪费问题研究</h1>
   <p>Understanding how dynamic changes in daily life disrupt food planning and lead to household food waste — from purchasing, storage, to consumption.</p>
+  <div class="meta">HCI Course Project · 用户访谈与问卷调查</div>
 </header>
 
 <section id="team">
   <h2>一、小组介绍 Team Introduction</h2>
-  <p>本小组共 4 名成员，均来自山东大学人机交互课程项目组。我们围绕"日常生活动态变化如何影响家庭食物浪费"这一主题开展用户研究，综合使用半结构化访谈与问卷调查两种方法收集真实用户数据。</p>
+  <p>本小组共 4 名成员，均来自山东大学人机交互课程项目组。我们围绕“日常生活动态变化如何影响食物浪费”这一主题开展用户研究，综合使用半结构化访谈与问卷调查两种方法收集用户数据。</p>
   <div class="team-grid">
-    <div class="team-card">
-      <div class="avatar">李</div>
-      <div class="name">李嘉欣</div>
-      <div class="sid">202302130293</div>
-      <div class="role">访谈脚本 · 主题一/二</div>
-    </div>
-    <div class="team-card">
-      <div class="avatar">于</div>
-      <div class="name">于博雅</div>
-      <div class="sid">202300130214</div>
-      <div class="role">访谈脚本 · 主题三/四</div>
-    </div>
-    <div class="team-card">
-      <div class="avatar">简</div>
-      <div class="name">简照燕</div>
-      <div class="sid">202300130261</div>
-      <div class="role">问卷设计 · 第一/二部分</div>
-    </div>
-    <div class="team-card">
-      <div class="avatar">丁</div>
-      <div class="name">丁正旸</div>
-      <div class="sid">202300130113</div>
-      <div class="role">问卷设计 · 第三/四部分</div>
-    </div>
+    <div class="team-card"><div class="avatar">李</div><div class="name">李嘉欣</div><div class="sid">202302130293</div><div class="role">访谈脚本 · 主题一/二</div></div>
+    <div class="team-card"><div class="avatar">于</div><div class="name">于博雅</div><div class="sid">202300130214</div><div class="role">访谈脚本 · 主题三/四</div></div>
+    <div class="team-card"><div class="avatar">简</div><div class="name">简照燕</div><div class="sid">202300130261</div><div class="role">问卷设计 · 第一/二部分</div></div>
+    <div class="team-card"><div class="avatar">丁</div><div class="name">丁正旸</div><div class="sid">202300130113</div><div class="role">问卷设计 · 第三/四部分</div></div>
   </div>
 </section>
 
 <section id="proposal">
   <h2>二、项目方案 Project Proposal</h2>
-  <div class="callout">
-    <strong>项目简介：</strong>本项目研究人们日常生活计划的变化如何影响其食物购买、储存、管理与消费行为，以及这些动态如何导致家庭食物浪费。我们特别关注不同食物消费模式的用户之间的差异，重点比较主要购买零食与即食食品的用户、主要购买烹饪食材的用户，以及同时具有两种消费模式的用户。我们预期，在这些不同的日常食物消费情境下，导致食物被浪费的机制可能存在显著差异。
-  </div>
-  <p>在城市独居青年、合租研究生与在校大学生群体中，食物浪费并非单纯由"买太多"造成，而更多与日程被临时打断（加班、聚餐、社团活动、实验突发）有关。本研究希望定位"计划变化 → 已购食物未被按原计划消耗 → 最终被丢弃"这一链条中的关键节点，为后续设计减少食物浪费的交互系统提供依据。</p>
+  <div class="callout"><strong>项目简介：</strong>本项目研究人们日常生活计划的变化如何影响其食物购买、储存、管理与消费行为，以及这些动态如何导致食物浪费。我们特别关注不同食物消费模式的用户之间的差异，重点比较主要购买零食与即食食品的用户、主要购买烹饪食材的用户，以及同时具有两种消费模式的用户。我们希望识别不同日常食物消费情境下，导致食物被浪费的具体机制。</div>
+  <p>在城市独居青年、合租研究生与在校大学生群体中，食物浪费并非单纯由“买太多”造成，也可能与日程被临时打断（加班、聚餐、社团活动、实验安排变化）有关。本研究希望定位“计划变化 → 已购食物未被按原计划消耗 → 最终被丢弃”这一链条中的关键节点，为后续设计减少食物浪费的交互系统提供依据。</p>
 </section>
 
 <section id="goals">
   <h2>三、研究目标 Research Goals</h2>
-  <ol>
-    <li>了解不同居住状况与食物消费模式的用户在日常生活中如何购买、储存和管理食物；</li>
-    <li>探索日常计划的意外变化如何打断已购食物的原定使用；</li>
-    <li>定位食物最终被浪费发生在哪个环节、为什么被浪费，以及用户现有的应对策略为何不够有效。</li>
-  </ol>
+  <ol><li>了解不同居住状况与食物消费模式的用户在日常生活中如何购买、储存和管理食物；</li><li>探索日常计划的意外变化如何打断已购食物的原定使用；</li><li>定位食物最终被浪费发生在哪个环节、为什么被浪费，以及用户现有的应对策略为何不够有效。</li></ol>
 </section>
 
 <section id="questions">
   <h2>四、研究问题 Research Questions</h2>
-  <ol>
-    <li>用户是谁？其居住与食物管理情境如何（独居还是与他人同住？食物由谁管理？）</li>
-    <li>用户如何规划购买、决定先吃什么、如何管理不同种类的食物？</li>
-    <li>日常计划的意外变化如何打乱已购食物的原定使用？</li>
-    <li>食物最终为什么被浪费？用户在何时意识到这一点？现有策略为何失效？</li>
-  </ol>
+  <ol><li>用户是谁？其居住与食物管理情境如何（独居还是与他人同住？食物由谁管理？）</li><li>用户如何规划购买、决定先吃什么、如何管理不同种类的食物？</li><li>日常计划的意外变化如何打乱已购食物的原定使用？</li><li>食物最终为什么被浪费？用户在何时意识到这一点？现有策略为何失效？</li></ol>
 </section>
 
 <section id="dataplan">
   <h2>五、数据收集计划 Data Collection Plan</h2>
-
   <h3>5.1 访谈计划（半结构化访谈）</h3>
-  <p>我们计划访谈 <strong>4 名潜在用户</strong>，覆盖三类典型消费模式：</p>
-  <table>
-    <tr><th>编号</th><th>画像</th><th>居住状态</th><th>主要食物类型</th></tr>
-    <tr><td>P1</td><td>本科大四学生</td><td>校外独居</td><td>零食 / 即食食品为主</td></tr>
-    <tr><td>P2</td><td>硕士二年级学生</td><td>与室友合租</td><td>需烹饪食材为主</td></tr>
-    <tr><td>P3</td><td>本科大二学生</td><td>学校四人间宿舍</td><td>混合型（零食+食堂+外卖）</td></tr>
-    <tr><td>P4</td><td>互联网公司全职员工</td><td>独居一居室</td><td>外卖 / 即食食品为主</td></tr>
-  </table>
-
-  <p>每场访谈时长约 15–20 分钟，围绕四个主题展开，并在用户回答后进行 <em>What / Why / How</em> 类型的临场追问：</p>
-  <ul>
-    <li><span class="tag">主题一</span> 用户与生活情境（居住、决策、食物类型、做饭习惯、日程稳定性）</li>
-    <li><span class="tag">主题二</span> 食物购买与管理（买什么、买多少、库存感知、优先级、分类管理）</li>
-    <li><span class="tag">主题三</span> 日常计划变化（核心：计划被打断的经历、应对方式、遗忘现象）</li>
-    <li><span class="tag">主题四</span> 食物浪费与现有应对策略（丢弃时刻、处理选项、现有办法的失效场景）</li>
-  </ul>
-
+  <p>计划访谈 4 名潜在用户，覆盖不同居住情境与食物消费模式。每场访谈约 15–20 分钟，并围绕四个主题开展 What / Why / How 追问。</p>
+  <div class="table-wrap"><table><tr><th>编号</th><th>用户画像</th><th>居住状态</th><th>主要食物类型</th></tr>
+  <tr><td>P1</td><td>本科大四学生</td><td>校外独居</td><td>零食 / 即食食品为主</td></tr>
+  <tr><td>P2</td><td>硕士二年级学生</td><td>与室友合租</td><td>需烹饪食材为主</td></tr>
+  <tr><td>P3</td><td>本科大二学生</td><td>学校四人间宿舍</td><td>混合型（零食、食堂、外卖）</td></tr>
+  <tr><td>P4</td><td>互联网公司全职员工</td><td>独居一居室</td><td>外卖 / 即食食品为主，偶尔买生鲜</td></tr></table></div>
+  <p>访谈主题包括：<span class="tag">主题一</span>用户与生活情境；<span class="tag">主题二</span>食物购买与管理；<span class="tag">主题三</span>日常计划变化；<span class="tag">主题四</span>食物浪费与现有应对策略。</p>
   <h3>5.2 问卷调查计划</h3>
-  <p>我们通过在线问卷收集 <strong>不少于 10 份</strong> 潜在用户的结构化数据。问卷共 20 题，分四部分：</p>
-  <div class="two-col">
-    <div>
-      <h3>第一部分：用户与生活情境</h3>
-      <ul>
-        <li>Q1 年龄段</li>
-        <li>Q2 主要身份</li>
-        <li>Q3 居住情况</li>
-        <li>Q4 主要购买食物类型</li>
-        <li>Q5 每周购买食物次数</li>
-      </ul>
-    </div>
-    <div>
-      <h3>第二部分：食物规划与管理</h3>
-      <ul>
-        <li>Q6 提前多久决定吃什么</li>
-        <li>Q7 一次买的食物计划吃多久</li>
-        <li>Q8 是否考虑家里已有食物（Likert 1–5）</li>
-        <li>Q9 过去一月重复购买频率</li>
-        <li>Q10 食物管理方式（多选）</li>
-      </ul>
-    </div>
-    <div>
-      <h3>第三部分：日常计划变化</h3>
-      <ul>
-        <li>Q11 日程意外变化频率（Likert 1–5）</li>
-        <li>Q12 影响饮食安排的情况（多选）</li>
-        <li>Q13 计划变化时改变饮食程度（Likert 1–5）</li>
-        <li>Q14 未按原计划食用的次数</li>
-        <li>Q15 重新安排已购食物的容易程度（Likert 1–5）</li>
-      </ul>
-    </div>
-    <div>
-      <h3>第四部分：食物浪费</h3>
-      <ul>
-        <li>Q16 过去一月丢弃可食用食物次数</li>
-        <li>Q17 丢弃的主要食物类型（多选）</li>
-        <li>Q18 丢弃原因（多选，最多 3 项）</li>
-        <li>Q19 避免浪费的额外措施意愿（Likert 1–5）</li>
-        <li>Q20 未采取措施的障碍（多选）</li>
-      </ul>
-    </div>
-  </div>
-    
+  <p>问卷共 20 题，分为用户与生活情境、食物规划与管理、日常计划变化、食物浪费四部分。以下为实际收集到的问卷数据与访谈整理结果。</p>
 </section>
 
-<footer>
-  © 2026 HCI Course Project Team · 食物浪费研究小组 · 本网站仅用于课程作业展示
-</footer>
+<section id="findings">
+  <h2>六、调研数据与发现 Research Findings</h2>
+  <p>本次整理包含 <strong>12 份问卷记录</strong>和 <strong>4 份访谈记录</strong>。以下统计根据当前提供的数据计算，主要用于探索样本中的共性与差异，不代表所有人群的总体情况。</p>
+  <div class="stats">
+    <div class="stat-card"><div class="stat-number">12</div><div class="stat-label">问卷记录（R01–R12）</div></div>
+    <div class="stat-card"><div class="stat-number">4</div><div class="stat-label">半结构化访谈（P1–P4）</div></div>
+    <div class="stat-card"><div class="stat-number">8/12</div><div class="stat-label">报告每月有过 2 次及以上食物丢弃</div></div>
+    <div class="stat-card"><div class="stat-number">9/12</div><div class="stat-label">报告日程变化影响饮食安排程度为 3 分及以上</div></div>
+  </div>
 
+  <div class="two-col">
+    <div class="chart-panel"><h3>问卷：居住情境</h3><div id="livingChart"></div></div>
+    <div class="chart-panel"><h3>问卷：主要食物消费类型</h3><div id="foodChart"></div></div>
+    <div class="chart-panel"><h3>问卷：日程变化影响饮食程度（Q13）</h3><div id="dietChart"></div></div>
+    <div class="chart-panel"><h3>问卷：过去一月丢弃食物次数（Q16）</h3><div id="wasteChart"></div></div>
+    <div class="chart-panel"><h3>问卷：食物管理方式（Q10，多选）</h3><div id="manageChart"></div></div>
+    <div class="chart-panel"><h3>问卷：主要浪费原因（Q18，多选）</h3><div id="reasonChart"></div></div>
+  </div>
+
+  <h3>6.1 访谈摘要</h3>
+  <div class="interview-grid">
+    <div class="interview-card"><h3>P1 · 独居 / 零食即食</h3><p><span class="tag">促销囤货</span><span class="tag">库存遗忘</span></p><p>购买时常受打折和即时欲望影响，主要凭记忆判断库存。蔬菜、水果等放入冰箱后容易被遗忘；临时聚餐或加班会打乱原本的食用计划。</p><div class="quote">“我根本不知道自己接下来几天会干嘛。”</div><p><strong>设计启示：</strong>提醒应结合库存可见性和临近变质风险，单纯提醒“少买点”可能不够。</p></div>
+    <div class="interview-card"><h3>P2 · 合租 / 烹饪食材</h3><p><span class="tag">计划被打断</span><span class="tag">共享归属不清</span></p><p>菜单和购物清单在日程稳定时有效，但导师临时安排、实验延迟会使食材错过最佳处理时间。合用冰箱时，食物归属不清也会造成双方都不处理。</p><div class="quote">“导师一喊聚餐，我那菜单就跟废纸一样。”</div><p><strong>设计启示：</strong>支持临时改期、食材优先级调整，并清楚标记食物归属。</p></div>
+    <div class="interview-card"><h3>P3 · 学生宿舍 / 混合型</h3><p><span class="tag">无冰箱</span><span class="tag">大包装囤货</span></p><p>促销会促使用户购买大包装零食，但口味变化后容易剩余。宿舍没有冰箱，生鲜保存时间短；临时社团活动也可能导致原定聚餐取消。</p><div class="quote">“宿舍没冰箱，夏天东西坏得特别快。”</div><p><strong>设计启示：</strong>考虑无冰箱场景，提供小份购买建议、短期食用提醒和可行的分享方案。</p></div>
+    <div class="interview-card"><h3>P4 · 独居 / 外卖即食</h3><p><span class="tag">突发加班</span><span class="tag">冷冻区遗忘</span></p><p>平时主要点外卖，周末偶尔购买生鲜。突发加班会让计划中的烹饪落空；冷冻室深处的食物不易被看见，可能长期遗忘。</p><div class="quote">“我根本不知道我哪天要加班。”</div><p><strong>设计启示：</strong>将库存记录、可见的食物清单与灵活的食用计划结合，而非假设用户能严格执行日程。</p></div>
+  </div>
+
+  <h3>6.2 跨用户综合发现</h3>
+  <div class="panel">
+    <ol>
+      <li><strong>日程不确定性是关键干扰因素。</strong> 临时加班、聚餐、实验安排和社团活动，会让原定饮食计划失效。</li>
+      <li><strong>“看不见”会导致“想不起来”。</strong> 冰箱深处、冷冻室、柜子底部的食物更容易被遗忘，单靠记忆管理库存不可靠。</li>
+      <li><strong>促销与大包装容易造成过量购买。</strong> 用户会因为单价更低而购买超过实际需求的数量，尤其是独居或宿舍用户。</li>
+      <li><strong>现有策略在计划变化时容易失效。</strong> 购物清单、菜单、少买一点等办法有帮助，但难以应对无法预料的安排变化。</li>
+      <li><strong>用户情境差异很重要。</strong> 独居用户面临食材份量不匹配；合租用户可能遇到食物归属不清；无冰箱宿舍用户则受到储存条件限制。</li>
+    </ol>
+  </div>
+  <h3>6.3 对后续交互设计的启示</h3>
+  <ul>
+    <li>让用户快速记录已有食物，并能按“优先食用”“即将到期”等条件查看。</li>
+    <li>计划变化时，提供简单的重新安排入口，而不是要求用户维护一份固定菜单。</li>
+    <li>针对不同储存条件提供不同建议，例如无冰箱宿舍、普通冷藏和冷冻储存。</li>
+    <li>考虑小份购买、剩余食材搭配和分享提醒，但避免增加过多记录负担。</li>
+  </ul>
+
+  <details>
+    <summary>查看问卷原始记录（12 份）</summary>
+    <p class="note">下表按提交内容展示。R10 的 Q17–Q20 字段疑似错位，R10 的 Q19、Q20 及 Q17、Q18 不宜直接纳入对应题目的统计；R11 的部分字段为空。建议回看原始 Excel 核实后再用于正式报告。</p>
+    <div class="table-wrap"><table id="rawTable"><thead></thead><tbody></tbody></table></div>
+  </details>
+</section>
+
+<footer>© 2026 HCI Course Project Team · 食物浪费研究小组 · 本网站仅用于课程作业展示</footer>
+<script>
+const survey = [
+{ID:"R01",age:"21-23",identity:"本科",living:"学校宿舍",food:"零食饮料为主",buy:"2-3次",plan:"当天",days:"2-3天",existing:4,repeat:"2-3次",methods:"看包装保质期;靠记忆",change:3,causes:"临时学习;太累没精力做饭;临时活动",diet:4,missed:"2-3次",waste:"2-3次",wasteType:"水果蔬菜;零食",reasons:"忘了家里还有;买得太多;原计划改变",willing:4,barriers:"太花时间;想不出别的用途;已经太忙太累"},
+{ID:"R02",age:"21-23",identity:"本科",living:"学校宿舍",food:"零食和食材差不多",buy:"4-5次",plan:"提前1-2天",days:"4-6天",existing:3,repeat:"1次",methods:"靠记忆;手机备忘录",change:2,causes:"临时活动;朋友聚餐",diet:3,missed:"1次",waste:"1次",wasteType:"面包主食;零食",reasons:"忘了家里还有",willing:3,barriers:"想不出别的用途;食物本身不值多少钱"},
+{ID:"R03",age:"24-26",identity:"研究生",living:"与室友合租",food:"需烹饪食材为主",buy:"2-3次",plan:"提前1-2天",days:"4-6天",existing:5,repeat:"1次",methods:"看包装保质期;查看冰箱;购物清单",change:3,causes:"临时加班;实验安排变化",diet:4,missed:"2-3次",waste:"2-3次",wasteType:"水果蔬菜;肉类海鲜;鸡蛋乳制品",reasons:"原计划改变;出去吃了;食物已经变质",willing:5,barriers:"不知道怎么保存;需要额外烹饪"},
+{ID:"R04",age:"24-26",identity:"研究生",living:"与室友合租",food:"需烹饪食材为主",buy:"2-3次",plan:"提前3-6天",days:"大约一周",existing:5,repeat:"从没有",methods:"购物清单;查看冰箱;看包装保质期",change:4,causes:"临时加班;和朋友聚餐;旅行",diet:4,missed:"2-3次",waste:"2-3次",wasteType:"水果蔬菜;肉类海鲜",reasons:"原计划改变;买得太多",willing:4,barriers:"需要额外烹饪;不知道怎么保存"},
+{ID:"R05",age:"21-23",identity:"本科",living:"独居",food:"即食方便食品为主",buy:"4-5次",plan:"基本不提前计划",days:"一天以内",existing:2,repeat:"4-5次",methods:"靠记忆;看包装保质期",change:5,causes:"临时外出;朋友聚餐;太累没精力做饭",diet:5,missed:"4-5次",waste:"4-5次",wasteType:"水果蔬菜;熟食剩菜;饮料",reasons:"忘了家里还有;原计划改变;出去吃了",willing:3,barriers:"太花时间;已经太忙太累;食物本身不值多少钱"},
+{ID:"R06",age:"27-30",identity:"全职工作",living:"独居",food:"外卖餐厅为主",buy:"0-1次",plan:"基本不提前计划",days:"一天以内",existing:3,repeat:"1次",methods:"没有特别的方法",change:4,causes:"临时加班;应酬;太累没精力做饭",diet:5,missed:"2-3次",waste:"2-3次",wasteType:"水果蔬菜;熟食剩菜",reasons:"原计划改变;没时间准备;食物已经变质",willing:3,barriers:"已经太忙太累;不知道怎么保存;太花时间"},
+{ID:"R07",age:"18-20",identity:"本科",living:"学校宿舍",food:"零食饮料为主",buy:"6次及以上",plan:"当天",days:"2-3天",existing:2,repeat:"2-3次",methods:"靠记忆",change:3,causes:"朋友聚餐;临时活动",diet:3,missed:"1次",waste:"2-3次",wasteType:"零食;饮料;面包主食",reasons:"买得太多;不想再吃了",willing:2,barriers:"食物本身不值多少钱;想不出别的用途"},
+{ID:"R08",age:"24-26",identity:"研究生",living:"学校宿舍",food:"零食和食材差不多",buy:"2-3次",plan:"当天",days:"2-3天",existing:3,repeat:"2-3次",methods:"手机备忘录;看包装保质期",change:3,causes:"临时学习;朋友聚餐",diet:3,missed:"1次",waste:"1次",wasteType:"水果蔬菜;零食",reasons:"忘了家里还有;原计划改变",willing:4,barriers:"不方便分享给别人;不知道怎么保存"},
+{ID:"R09",age:"27-30",identity:"全职工作",living:"独居",food:"即食方便食品为主",buy:"2-3次",plan:"当天",days:"2-3天",existing:4,repeat:"1次",methods:"查看冰箱;看包装保质期",change:4,causes:"临时加班;太累没精力做饭",diet:4,missed:"2-3次",waste:"2-3次",wasteType:"水果蔬菜;熟食剩菜;乳制品",reasons:"原计划改变;食物已经变质",willing:4,barriers:"已经太忙太累;不知道怎么保存"},
+{ID:"R10",age:"21-23",identity:"本科",living:"与家人同住",food:"需烹饪食材为主",buy:"0-1次",plan:"提前1-2天",days:"大约一周",existing:5,repeat:"从没有",methods:"家人提醒;查看冰箱",change:2,causes:"家庭安排变化",diet:2,missed:"0次",waste:"0次",wasteType:"",reasons:"",willing:"",barriers:"5（原始表字段疑似错位）"},
+{ID:"R11",age:"21-23",identity:"本科",living:"学校宿舍",food:"外卖餐厅为主",buy:"0-1次",plan:"基本不提前计划",days:"一天以内",existing:1,repeat:"从没有",methods:"没有特别的方法",change:3,causes:"朋友聚餐;临时活动",diet:3,missed:"0次",waste:"1次",wasteType:"零食",reasons:"不想再吃了",willing:2,barriers:"食物本身不值多少钱"},
+{ID:"R12",age:"24-26",identity:"全职工作",living:"独居",food:"零食和食材差不多",buy:"2-3次",plan:"提前1-2天",days:"4-6天",existing:4,repeat:"1次",methods:"手机备忘录;查看冰箱;看包装保质期",change:4,causes:"临时加班;应酬",diet:4,missed:"2-3次",waste:"2-3次",wasteType:"水果蔬菜;肉类海鲜;冷冻食品",reasons:"原计划改变;买得太多;没时间准备",willing:4,barriers:"需要额外烹饪;太花时间;不知道怎么保存"}
+];
+function barChart(id, entries){
+ const root=document.getElementById(id); const total=Math.max(...entries.map(x=>x[1]),1);
+ root.innerHTML=entries.map(([label,value])=>`<div class="bar-row"><div>${label}</div><div class="bar-track"><div class="bar-fill" style="width:${value/total*100}%"></div></div><div class="bar-value">${value}</div></div>`).join("");
+}
+function countBy(key, split=false){
+ const c={}; survey.forEach(r=>{let values=split?(r[key]||"").split(";").filter(Boolean):[r[key]||"未填写"];values.forEach(v=>c[v]=(c[v]||0)+1)});return Object.entries(c).sort((a,b)=>b[1]-a[1]);
+}
+barChart("livingChart",countBy("living"));
+barChart("foodChart",countBy("food"));
+barChart("dietChart",["1","2","3","4","5"].map(v=>[v+" 分",survey.filter(r=>String(r.diet)===v).length]));
+barChart("wasteChart",["0次","1次","2-3次","4-5次","6次及以上"].map(v=>[v,survey.filter(r=>r.waste===v).length]));
+barChart("manageChart",countBy("methods",true));
+barChart("reasonChart",countBy("reasons",true).filter(([k])=>k!=="未填写"));
+const fields=[["ID","RespondentID"],["age","Q1 年龄"],["identity","Q2 身份"],["living","Q3 居住情况"],["food","Q4 主要食物类型"],["buy","Q5 购买频率"],["plan","Q6 提前规划"],["days","Q7 计划食用时长"],["existing","Q8 考虑已有食物（1-5）"],["repeat","Q9 重复购买"],["methods","Q10 管理方式"],["change","Q11 日程变化频率（1-5）"],["causes","Q12 变化原因"],["diet","Q13 饮食受影响程度（1-5）"],["missed","Q14 未按计划食用次数"],["waste","Q16 丢弃次数"],["wasteType","Q17 丢弃食物类型"],["reasons","Q18 丢弃原因"],["willing","Q19 减少浪费意愿"],["barriers","Q20 障碍"]];
+const thead=document.querySelector("#rawTable thead"),tbody=document.querySelector("#rawTable tbody");
+thead.innerHTML="<tr>"+fields.map(f=>`<th>${f[1]}</th>`).join("")+"</tr>";
+tbody.innerHTML=survey.map(r=>"<tr>"+fields.map(f=>`<td>${String(r[f[0]]??"").replaceAll("&","&amp;").replaceAll("<","&lt;")||"—"}</td>`).join("")+"</tr>").join("");
+</script>
 </body>
 </html>
+'''
+path = Path("/mnt/data/HCI_food_waste_project_with_data.html")
+path.write_text(html, encoding="utf-8")
+print(f"已生成网页文件：{path}（{path.stat().st_size:,} 字节）")
