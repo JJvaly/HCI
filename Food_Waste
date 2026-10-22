@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>日常生活动态变化下的食物浪费问题研究 · HCI P3 Project Website</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    line-height: 1.75;
+    color: #2c3e2d;
+    background: #f7f9f4;
+  }
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: #2d5016;
+    padding: 14px 40px;
+    display: flex; justify-content: space-between; align-items: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+  nav .brand { color: #fff; font-weight: 700; font-size: 17px; }
+  nav a { color: #d8e6c8; text-decoration: none; margin-left: 22px; font-size: 14px; transition: color .2s; }
+  nav a:hover { color: #fff; }
+  header.hero {
+    background: linear-gradient(135deg, #4a7c2f 0%, #6faa44 100%);
+    color: #fff;
+    padding: 80px 40px;
+    text-align: center;
+  }
+  header.hero h1 { font-size: 34px; margin-bottom: 16px; font-weight: 700; }
+  header.hero p { font-size: 17px; max-width: 760px; margin: 0 auto; opacity: 0.95; }
+  header.hero .meta { margin-top: 22px; font-size: 14px; opacity: 0.85; }
+  section { max-width: 960px; margin: 0 auto; padding: 56px 32px; }
+  h2 {
+    font-size: 26px; color: #2d5016;
+    border-left: 5px solid #6faa44;
+    padding-left: 14px; margin-bottom: 26px;
+  }
+  h3 { font-size: 18px; color: #3a6120; margin: 22px 0 10px; }
+  p { margin-bottom: 12px; color: #3a4a3a; }
+  .team-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 18px; margin-top: 20px;
+  }
+  .team-card {
+    background: #fff; border-radius: 10px; padding: 22px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    text-align: center;
+    border-top: 3px solid #6faa44;
+  }
+  .team-card .avatar {
+    width: 56px; height: 56px; border-radius: 50%;
+    background: #e3efd4; color: #2d5016;
+    line-height: 56px; font-size: 20px; font-weight: 700;
+    margin: 0 auto 10px;
+  }
+  .team-card .name { font-weight: 600; color: #2d5016; }
+  .team-card .sid { font-size: 13px; color: #7a8a7a; margin-top: 4px; }
+  .team-card .role { font-size: 13px; color: #5a7a4a; margin-top: 8px; }
+  .callout {
+    background: #eef5e3; border-left: 4px solid #6faa44;
+    padding: 16px 20px; border-radius: 0 8px 8px 0; margin: 18px 0;
+  }
+  ul, ol { margin: 10px 0 16px 24px; }
+  li { margin-bottom: 6px; color: #3a4a3a; }
+  table {
+    width: 100%; border-collapse: collapse; margin: 16px 0;
+    background: #fff; border-radius: 8px; overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+  }
+  th, td { padding: 10px 14px; text-align: left; border-bottom: 1px solid #eef2e8; font-size: 14px; }
+  th { background: #4a7c2f; color: #fff; font-weight: 600; }
+  tr:hover td { background: #f9fbf5; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  @media (max-width: 720px) { .two-col { grid-template-columns: 1fr; } }
+  footer {
+    background: #2d5016; color: #c8d8b8; text-align: center;
+    padding: 24px; font-size: 13px; margin-top: 40px;
+  }
+  .tag {
+    display: inline-block; background: #e3efd4; color: #2d5016;
+    padding: 2px 10px; border-radius: 12px; font-size: 12px; margin-right: 6px;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="brand">🍃 Food Waste HCI Project</div>
+  <div>
+    <a href="#team">小组介绍</a>
+    <a href="#proposal">项目方案</a>
+    <a href="#goals">研究目标</a>
+    <a href="#questions">研究问题</a>
+    <a href="#dataplan">数据收集计划</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <h1>日常生活态变化下的食物浪费问题研究</h1>
+  <p>Understanding how dynamic changes in daily life disrupt food planning and lead to household food waste — from purchasing, storage, to consumption.</p>
+</header>
+
+<section id="team">
+  <h2>一、小组介绍 Team Introduction</h2>
+  <p>本小组共 4 名成员，均来自山东大学人机交互课程项目组。我们围绕"日常生活动态变化如何影响家庭食物浪费"这一主题开展用户研究，综合使用半结构化访谈与问卷调查两种方法收集真实用户数据。</p>
+  <div class="team-grid">
+    <div class="team-card">
+      <div class="avatar">李</div>
+      <div class="name">李嘉欣</div>
+      <div class="sid">202302130293</div>
+      <div class="role">访谈脚本 · 主题一/二</div>
+    </div>
+    <div class="team-card">
+      <div class="avatar">于</div>
+      <div class="name">于博雅</div>
+      <div class="sid">202300130214</div>
+      <div class="role">访谈脚本 · 主题三/四</div>
+    </div>
+    <div class="team-card">
+      <div class="avatar">简</div>
+      <div class="name">简照燕</div>
+      <div class="sid">202300130261</div>
+      <div class="role">问卷设计 · 第一/二部分</div>
+    </div>
+    <div class="team-card">
+      <div class="avatar">丁</div>
+      <div class="name">丁正旸</div>
+      <div class="sid">202300130113</div>
+      <div class="role">问卷设计 · 第三/四部分</div>
+    </div>
+  </div>
+</section>
+
+<section id="proposal">
+  <h2>二、项目方案 Project Proposal</h2>
+  <div class="callout">
+    <strong>项目简介：</strong>本项目研究人们日常生活计划的变化如何影响其食物购买、储存、管理与消费行为，以及这些动态如何导致家庭食物浪费。我们特别关注不同食物消费模式的用户之间的差异，重点比较主要购买零食与即食食品的用户、主要购买烹饪食材的用户，以及同时具有两种消费模式的用户。我们预期，在这些不同的日常食物消费情境下，导致食物被浪费的机制可能存在显著差异。
+  </div>
+  <p>在城市独居青年、合租研究生与在校大学生群体中，食物浪费并非单纯由"买太多"造成，而更多与日程被临时打断（加班、聚餐、社团活动、实验突发）有关。本研究希望定位"计划变化 → 已购食物未被按原计划消耗 → 最终被丢弃"这一链条中的关键节点，为后续设计减少食物浪费的交互系统提供依据。</p>
+</section>
+
+<section id="goals">
+  <h2>三、研究目标 Research Goals</h2>
+  <ol>
+    <li>了解不同居住状况与食物消费模式的用户在日常生活中如何购买、储存和管理食物；</li>
+    <li>探索日常计划的意外变化如何打断已购食物的原定使用；</li>
+    <li>定位食物最终被浪费发生在哪个环节、为什么被浪费，以及用户现有的应对策略为何不够有效。</li>
+  </ol>
+</section>
+
+<section id="questions">
+  <h2>四、研究问题 Research Questions</h2>
+  <ol>
+    <li>用户是谁？其居住与食物管理情境如何（独居还是与他人同住？食物由谁管理？）</li>
+    <li>用户如何规划购买、决定先吃什么、如何管理不同种类的食物？</li>
+    <li>日常计划的意外变化如何打乱已购食物的原定使用？</li>
+    <li>食物最终为什么被浪费？用户在何时意识到这一点？现有策略为何失效？</li>
+  </ol>
+</section>
+
+<section id="dataplan">
+  <h2>五、数据收集计划 Data Collection Plan</h2>
+
+  <h3>5.1 访谈计划（半结构化访谈）</h3>
+  <p>我们计划访谈 <strong>4 名潜在用户</strong>，覆盖三类典型消费模式：</p>
+  <table>
+    <tr><th>编号</th><th>画像</th><th>居住状态</th><th>主要食物类型</th></tr>
+    <tr><td>P1</td><td>本科大四学生</td><td>校外独居</td><td>零食 / 即食食品为主</td></tr>
+    <tr><td>P2</td><td>硕士二年级学生</td><td>与室友合租</td><td>需烹饪食材为主</td></tr>
+    <tr><td>P3</td><td>本科大二学生</td><td>学校四人间宿舍</td><td>混合型（零食+食堂+外卖）</td></tr>
+    <tr><td>P4</td><td>互联网公司全职员工</td><td>独居一居室</td><td>外卖 / 即食食品为主</td></tr>
+  </table>
+
+  <p>每场访谈时长约 15–20 分钟，围绕四个主题展开，并在用户回答后进行 <em>What / Why / How</em> 类型的临场追问：</p>
+  <ul>
+    <li><span class="tag">主题一</span> 用户与生活情境（居住、决策、食物类型、做饭习惯、日程稳定性）</li>
+    <li><span class="tag">主题二</span> 食物购买与管理（买什么、买多少、库存感知、优先级、分类管理）</li>
+    <li><span class="tag">主题三</span> 日常计划变化（核心：计划被打断的经历、应对方式、遗忘现象）</li>
+    <li><span class="tag">主题四</span> 食物浪费与现有应对策略（丢弃时刻、处理选项、现有办法的失效场景）</li>
+  </ul>
+
+  <h3>5.2 问卷调查计划</h3>
+  <p>我们通过在线问卷收集 <strong>不少于 10 份</strong> 潜在用户的结构化数据。问卷共 20 题，分四部分：</p>
+  <div class="two-col">
+    <div>
+      <h3>第一部分：用户与生活情境</h3>
+      <ul>
+        <li>Q1 年龄段</li>
+        <li>Q2 主要身份</li>
+        <li>Q3 居住情况</li>
+        <li>Q4 主要购买食物类型</li>
+        <li>Q5 每周购买食物次数</li>
+      </ul>
+    </div>
+    <div>
+      <h3>第二部分：食物规划与管理</h3>
+      <ul>
+        <li>Q6 提前多久决定吃什么</li>
+        <li>Q7 一次买的食物计划吃多久</li>
+        <li>Q8 是否考虑家里已有食物（Likert 1–5）</li>
+        <li>Q9 过去一月重复购买频率</li>
+        <li>Q10 食物管理方式（多选）</li>
+      </ul>
+    </div>
+    <div>
+      <h3>第三部分：日常计划变化</h3>
+      <ul>
+        <li>Q11 日程意外变化频率（Likert 1–5）</li>
+        <li>Q12 影响饮食安排的情况（多选）</li>
+        <li>Q13 计划变化时改变饮食程度（Likert 1–5）</li>
+        <li>Q14 未按原计划食用的次数</li>
+        <li>Q15 重新安排已购食物的容易程度（Likert 1–5）</li>
+      </ul>
+    </div>
+    <div>
+      <h3>第四部分：食物浪费</h3>
+      <ul>
+        <li>Q16 过去一月丢弃可食用食物次数</li>
+        <li>Q17 丢弃的主要食物类型（多选）</li>
+        <li>Q18 丢弃原因（多选，最多 3 项）</li>
+        <li>Q19 避免浪费的额外措施意愿（Likert 1–5）</li>
+        <li>Q20 未采取措施的障碍（多选）</li>
+      </ul>
+    </div>
+  </div>
+    
+</section>
+
+<footer>
+  © 2026 HCI Course Project Team · 食物浪费研究小组 · 本网站仅用于课程作业展示
+</footer>
+
+</body>
+</html>
